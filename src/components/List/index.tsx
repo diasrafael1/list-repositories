@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { FaBars, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { Repository } from "../../pages/Main";
 import { DeleteButton, List } from "./styles";
 
@@ -31,9 +32,9 @@ export default function MainList({ repositories, setRepositories }: Props) {
               </DeleteButton>
               {repository.name}
             </span>
-            <a>
+            <Link to={`/repositorios/${encodeURIComponent(repository.name)}`}>
               <FaBars size={20} />
-            </a>
+            </Link>
           </li>
         );
       })}
