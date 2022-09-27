@@ -76,7 +76,7 @@ export default function Main() {
           placeholder="Adicione repositórios"
           value={repoName}
           onChange={handleChangeValue}
-          style={alert ? { border: "1px solid red" } : null}
+          style={alert ? { border: "1px solid red" } : {}}
         />
 
         <SubmitButton type="submit">
