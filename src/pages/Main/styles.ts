@@ -7,6 +7,7 @@ export const Container = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 30px;
   margin: 80px auto;
+  position: relative;
 
   h1 {
     font-size: 20px;
@@ -38,6 +39,17 @@ export const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const Alert = styled.div`
+  position: absolute;
+  top: 135px;
+  left: 220px;
+
+  span {
+    color: red;
+    font-weight: bolder;
+  }
 `;
 
 export const List = styled.ul`
