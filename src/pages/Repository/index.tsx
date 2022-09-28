@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-import { Container, Owner, BackButton, IssuesList } from "./styles";
+import {
+  Container,
+  Owner,
+  BackButton,
+  IssuesList,
+  PageActions,
+} from "./styles";
 
 interface RepoData {
   name: string;
@@ -18,6 +24,7 @@ export default function Repository() {
     avatar_url: "",
   });
   const [issuesData, setIssuesData] = useState<any[]>([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function handleGetDetails() {
@@ -40,6 +47,24 @@ export default function Repository() {
     }
     handleGetDetails();
   }, [repoName]);
+
+  useEffect(() => {
+    async function handleLoadIssues() {
+      const response = await api.get(`/repos/${repoName}/issues`, {
+        params: {
+          state: "open",
+          page,
+          per_page: 5,
+        },
+      });
+      setIssuesData(response.data);
+    }
+    handleLoadIssues();
+  }, [repoName, page]);
+
+  function handlePage(action: string) {
+    setPage(action === "back" ? page - 1 : page + 1);
+  }
 
   return (
     <Container>
@@ -73,6 +98,13 @@ export default function Repository() {
           );
         })}
       </IssuesList>
+
+      <PageActions>
+        <button onClick={() => handlePage("back")} disabled={page < 2 && true}>
+          Voltar
+        </button>
+        <button onClick={() => handlePage("next")}>Proxima</button>
+      </PageActions>
     </Container>
   );
 }
