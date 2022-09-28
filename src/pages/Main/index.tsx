@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import MainForm from "../../components/Form";
-import MainList from "../../components/List";
+import ListRepos from "../../components/ListRepos";
 import { Alert, Container } from "./styles";
 
 export interface Repository {
@@ -41,7 +41,7 @@ export default function Main() {
         <span>{alert}</span>
       </Alert>
 
-      <MainList repositories={repositories} setRepositories={setRepositories} />
+      <ListRepos repositories={repositories} setRepositories={setRepositories} />
     </Container>
   );
 }

@@ -9,7 +9,7 @@ interface Props {
   setRepositories: React.Dispatch<React.SetStateAction<Repository[]>>;
 }
 
-export default function MainList({ repositories, setRepositories }: Props) {
+export default function ListRepos({ repositories, setRepositories }: Props) {
   const handleDelete = useCallback(
     (repoName: string): void => {
       const find = repositories.filter((repo) => repo.name !== repoName);
