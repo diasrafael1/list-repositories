@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
-import { Container, Owner, BackButton } from "./styles";
+import { Container, Owner, BackButton, IssuesList } from "./styles";
 
 interface RepoData {
   name: string;
@@ -17,7 +17,7 @@ export default function Repository() {
     description: "",
     avatar_url: "",
   });
-  const [issuesData, setIssuesData] = useState([]);
+  const [issuesData, setIssuesData] = useState<any[]>([]);
 
   useEffect(() => {
     async function handleGetDetails() {
@@ -40,7 +40,7 @@ export default function Repository() {
     }
     handleGetDetails();
   }, [repoName]);
-  console.log(repoData);
+
   return (
     <Container>
       <BackButton to="/">
@@ -52,6 +52,27 @@ export default function Repository() {
         <h1>{repoData.name}</h1>
         <p>{repoData.description}</p>
       </Owner>
+
+      <IssuesList>
+        {issuesData.map((issue) => {
+          return (
+            <li key={String(issue.id)}>
+              <img src={issue.user.avatar_url} />
+              <div>
+                <strong>
+                  <a href={issue.html_url}>{issue.title}</a>
+
+                  {issue.labels.map((label: { id: number; name: string }) => {
+                    return <span key={String(label.id)}>{label.name}</span>;
+                  })}
+                </strong>
+
+                <p>{issue.user.login}</p>
+              </div>
+            </li>
+          );
+        })}
+      </IssuesList>
     </Container>
   );
 }
