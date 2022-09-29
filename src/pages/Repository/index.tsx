@@ -10,18 +10,16 @@ export default function Repository() {
   const [repoData, setRepoData] = useState({
     name: "",
     description: "",
-    avatar_url: "",
+    owner: {
+      avatar_url: "",
+    },
   });
 
   useEffect(() => {
     async function handleGetDetails() {
       const response = await api.get(`/repos/${repoName}`);
 
-      setRepoData({
-        name: response.data.name,
-        description: response.data.description,
-        avatar_url: response.data.owner.avatar_url,
-      });
+      setRepoData(response.data);
     }
     handleGetDetails();
   }, [repoName]);
@@ -33,7 +31,7 @@ export default function Repository() {
       </BackButton>
 
       <Owner>
-        <img src={repoData.avatar_url} />
+        <img src={repoData.owner.avatar_url} />
         <h1>{repoData.name}</h1>
         <p>{repoData.description}</p>
       </Owner>
