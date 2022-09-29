@@ -3,9 +3,25 @@ import { useParams } from "react-router-dom";
 import { api } from "../../services/api";
 import { FilterActions, IssuesList, PageActions } from "./styles";
 
+interface Issues {
+  id: number;
+  user: {
+    login: string;
+    avatar_url: string;
+  };
+  html_url: string;
+  title: string;
+  labels: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+}
+
 export default function ListIssues() {
   const { repoName } = useParams();
-  const [issuesData, setIssuesData] = useState<any[]>([]);
+  const [issuesData, setIssuesData] = useState<Issues[]>([]);
   const [page, setPage] = useState(1);
   const [state, setState] = useState("all");
   const filterButtons = [
@@ -69,7 +85,7 @@ export default function ListIssues() {
                 <strong>
                   <a href={issue.html_url}>{issue.title}</a>
 
-                  {issue.labels.map((label: { id: number; name: string }) => {
+                  {issue.labels.map((label) => {
                     return <span key={String(label.id)}>{label.name}</span>;
                   })}
                 </strong>
