@@ -26,7 +26,7 @@ export default function MainForm({
         setAlert("");
         try {
           if (!repoName) {
-            throw new Error("Você precisa indicar um repositório!");
+            return setAlert("Você precisa indicar um repositório!");
           }
 
           const response = await api.get(`repos/${repoName}`);
@@ -42,7 +42,7 @@ export default function MainForm({
           setRepositories([...repositories, { name }]);
           setRepoName("");
         } catch (error: any) {
-          setAlert(error.message);
+          setAlert("Não foi encontrado um repositório com esse nome!");
         }
       }
 

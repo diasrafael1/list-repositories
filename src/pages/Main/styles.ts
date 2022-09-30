@@ -7,7 +7,6 @@ export const Container = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 30px;
   margin: 80px auto;
-  position: relative;
 
   h1 {
     font-size: 20px;
@@ -18,9 +17,9 @@ export const Container = styled.div`
 `;
 
 export const Alert = styled.div`
-  position: absolute;
-  top: 135px;
-  left: 220px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 
   span {
     color: red;
