@@ -4,9 +4,6 @@ Aplicação para listar repositórios do Github, consumindo sua API.
 <br/>
 [Deploy](https://list-repositories.netlify.app)
 
-<br/>
-<br/>
-
 ## Tecnologias
 
 - React
@@ -14,8 +11,6 @@ Aplicação para listar repositórios do Github, consumindo sua API.
 - Styled Components
 - Axios
 - Vite
-
----
 
 ## Página Principal
 
